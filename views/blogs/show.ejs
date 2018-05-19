@@ -4,39 +4,59 @@
     <div class="ui huge header"> <%= blog.title %></div>
     <div class="ui top attached ">
         <div class="item">
-              <img class="ui centered rounded image" src=" <%=blog.image%>" width="300px">
+              <img class="ui centered fluid rounded image" src=" <%=blog.image%>">
         </div>
-        <div class="content"> 
+         <a class="author" href="#">Posted by <%=blog.author.username%></a>
+        <div class="meta"> 
             <span><%=blog.created.toDateString() %></span>
+           
         </div>
-
+        
+        <% if(currentUser && blog.author.id.equals(currentUser._id)){ %>
         <a class="ui orange inverted mini button" href="/blogs/<%=blog._id %>/edit"><i id="editicon" class="pencil icon"></i>Edit</a>
         <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
             <button class="ui button inverted mini red"><i id="trashicon" class="trash icon"></i>Delete</button>
         </form>
-         <div class="description">
+        <% } %>
+        
+         <div class="ui very padded text segment">
               <p> <%- blog.body%></p>
         </div>
     </div>
     
 </div>
 
-<div class="ui main text container segment">
+<div class="ui main text container  segment">
     <div class="ui huge header">comments</div>
     <p> <a class="ui purple mini button" href="/blogs/<%=blog._id%>/comments/new">add new comment</a></p>
-    <div class="ui divided items">
+    <div class="ui divided comments items">
     <% blog.comments.forEach(function(comment){ %>
-    <div class="item">
-        <div class="content">
-        <a class="header"><%=comment.author%></a>
-        <div class="meta"> 
-            <span><%=comment.created.toDateString() %></span>
-        </div>
-  
-        <div class="description"> 
-            <p><%=comment.text%></p>
-        </div>
-    </div>
+    <div class="comment">
+    <a class="avatar">
+      <img src="https://images.unsplash.com/photo-1512867509911-35c6e82cf879?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=ffda40afcfb6cbeefa46faa33e8a8109" draggable="true" data-bukket-ext-bukket-draggable="true">
+    </a>
+    <div class="content">
+      <a class="author"><%=comment.author.username%></a>
+      <div class="metadata">
+        <span class="date"><%=comment.created.toDateString()%></span>
+        
+      </div>
+      <div class="text">
+        <%=comment.text %>
+      </div>
+      <div class="actions">
+        
+        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+        <a class="ui orange inverted mini button" href="/blogs/<%=blog._id %>/comments/<%=comment._id%>/edit">Edit</a>
+     <form id="delete" action="/blogs/<%= blog._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+         
+        <button class="ui red inverted mini button">Delete</button>
+        </form>
+       
+        <% }else{ %>
+        <a class="reply" href="/blogs/<%=blog._id%>/comments/new">Reply</a>
+        <% } %>
+       </div>
     </div>
 <%    }) %>
 </div>

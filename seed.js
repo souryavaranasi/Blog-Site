@@ -28,33 +28,33 @@ var data=[
 function seedDB(){
     //remove all blogs
     Blog.remove({},function(err){
-        if(err){
-            console.log(err)
-        }else{
-            console.log("removed all blogs");
-            //add new blogs
-            data.forEach(function(seed){
-                Blog.create(seed,function(err,blog){
-                    if(err){
-                        console.log(err);
-                    }else{
-                        console.log("added blog "+ blog);
-                        //add comment
-                        Comment.create({text:"abracadabra",author:"boomer"},function(err,comment){
-                            if(err){
-                                console.log(err);
-                            }else{
+        // if(err){
+        //     console.log(err)
+        // }else{
+        //     console.log("removed all blogs");
+        //     //add new blogs
+        //     data.forEach(function(seed){
+        //         Blog.create(seed,function(err,blog){
+        //             if(err){
+        //                 console.log(err);
+        //             }else{
+        //                 console.log("added blog "+ blog);
+        //                 //add comment
+        //                 Comment.create({text:"abracadabra",author:"boomer"},function(err,comment){
+        //                     if(err){
+        //                         console.log(err);
+        //                     }else{
                                 
-                                blog.comments.push(comment);
-                                blog.save();
-                                console.log("comment created "+ comment);
-                            }
-                        })
-                    }
-                })
-            })
+        //                         blog.comments.push(comment);
+        //                         blog.save();
+        //                         console.log("comment created "+ comment);
+        //                     }
+        //                 })
+        //             }
+        //         })
+        //     })
             
-        }
+        // }
     });
 }
 

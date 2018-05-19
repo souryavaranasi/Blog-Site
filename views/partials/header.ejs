@@ -13,6 +13,16 @@
                 <div class="header item"><i class="quote left icon"></i>Blog Site</div>
                     <a href="/" class="item">Home </a>
                     <a href="/blogs/new" class="item">New Post </a>
+                     <div class="right menu">
+                        <% if(!currentUser){ %>
+                            <a class="item" href="/register">Sign Up</a>
+                            <a class="item" href="/login">Login</a>
+                            
+                            <% }else{ %>
+                            <a class="item" href="#">Signed in as <%= currentUser.username%></a>
+                            <a class="item" href="/logout">Logout</a>
+                        <%    } %>
+                     </div>
             </div>
            
         </div>
