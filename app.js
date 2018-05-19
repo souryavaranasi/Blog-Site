@@ -17,8 +17,9 @@ var commentRoutes=require("./routes/comments"),
     blogRoutes=require("./routes/blogs"),
     indexRoutes=require("./routes/index");
     
+var url=process.env.DATABASEURL  || "mongodb://localhost/restful_blog_app"
 // mongoose.connect("mongodb://localhost/restful_blog_app", {useMongoClient: true});
-mongoose.connect(process.env.DATABASEURL,{useMongoClient:true});
+mongoose.connect(url,{useMongoClient:true});
 
 
 
