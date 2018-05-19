@@ -11,13 +11,17 @@ var express=require("express"),
     User=require("./models/user"),
     seedDB= require("./seed");
     // seedDB();
-    mongoose.Promise = global.Promise; 
+    // mongoose.Promise = global.Promise; 
 
 var commentRoutes=require("./routes/comments"),
     blogRoutes=require("./routes/blogs"),
     indexRoutes=require("./routes/index");
     
-mongoose.connect("mongodb://localhost/restful_blog_app", {useMongoClient: true});
+// mongoose.connect("mongodb://localhost/restful_blog_app", {useMongoClient: true});
+mongoose.connect("mongodb://blogsite:blogsite@ds229450.mlab.com:29450/blogsite", {useMongoClient: true});
+
+// mongodb://blogsite:blogsite@ds229450.mlab.com:29450/blogsite
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set("view engine","ejs");
 app.use(express.static(__dirname+"/public"));
